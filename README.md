@@ -1,4 +1,6 @@
-## 🚀 Step 1: Set Up the Project in VS Code  
+# 🚀 Project Steps
+
+## Step 1: Set Up the Project in VS Code  
 
 ### 📌 Create a New Project Folder  
 1. Open **Visual Studio Code**.  
@@ -22,3 +24,7 @@ source venv/bin/activate
 mkdir tests
 touch checkout.py product.py requirements.txt README.md tests/test_checkout.py
 ```
+
+## Step 2: Created product.py
+- Introduced the `product.py` file which contains the product logic for managing products in the system.
+
