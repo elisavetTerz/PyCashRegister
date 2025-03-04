@@ -22,3 +22,9 @@ source venv/bin/activate
 mkdir tests
 touch checkout.py product.py requirements.txt README.md tests/test_checkout.py
 ```
+
+## Step 2: Created product.py
+- Introduced the product.py file which contains the product logic for managing products in the system.
+
+## Step 3: Created test_product.py
+- Introduced the `test_product.py` file which contains unit tests to validate the functionality of the `product.py` file.
