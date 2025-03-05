@@ -1,0 +1,49 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+*.env
+*.venv
+
+# IDE configuration files
+.vscode/
+.idea/
+
+# Flask instance folder (if any)
+instance/
+
+# Database files
+*.sqlite3
+
+# Logs
+*.log
+
+# Environment variables file
+.env
+
+# Pytest and other testing tool caches
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.hypothesis/
+
+# Jupyter Notebook files
+.ipynb_checkpoints/
+
+# Distribution and packaging
+build/
+dist/
+*.egg-info/
+
+# Python specific build tools
+pyenv/
+pipenv/
+poetry/
+
+# Miscellaneous
+*.swp
+.DS_Store  # macOS system file
+Thumbs.db  # Windows system file
