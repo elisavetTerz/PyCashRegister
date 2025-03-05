@@ -27,3 +27,6 @@ touch checkout.py requirements.txt README.md tests/test_checkout.py
 ## Step 2: Created checkout.py
 - Introduced the `checkout.py` file which contains the product logic for managing products in the system.
 - This file defines the Product class for representing individual products and the Checkout class for handling cart operations and applying pricing rules.
+
+## Step 3: Created test_checkout.py
+- Introduced the `test_checkout.py` file which contains unit tests to validate the functionality of the `checkout.py` file.
