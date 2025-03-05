@@ -57,3 +57,11 @@ class Checkout:
                 total_price += count * base_price
 
         return round(total_price, 2)
+    
+    def remove(self, product_code):
+        """Remove a product from the cart by its code."""
+        for product in self.cart:
+            if product.code == product_code:
+                self.cart.remove(product)
+                return
+        raise KeyError("Product not found in cart")
