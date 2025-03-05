@@ -20,17 +20,17 @@ instance/
 # Logs
 *.log
 
-# Environment variables file
+# Environment variables
 .env
 
-# Pytest and other testing tool caches
+# Testing tool caches
 .cache/
 nosetests.xml
 coverage.xml
 *.cover
 *.hypothesis/
 
-# Jupyter Notebook files
+# Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
 # Distribution and packaging
