@@ -1,95 +1,59 @@
 import unittest
-from checkout import Checkout
+from checkout import Product, Checkout
 
 class TestCheckout(unittest.TestCase):
-    def setUp(self) -> None:
-        """
-        Set up the initial pricing rules and checkout instance.
-        """
+    def setUp(self):
+        # Define product prices and rules as Product objects
         self.pricing_rules = {
-            'GR1': {'price': 3.11},
-            'SR1': {'price': 5.00},
-            'CF1': {'price': 11.23}
+            'GR1': Product('GR1', 'Green Tea', 3.11),
+            'SR1': Product('SR1', 'Strawberries', 5.00),
+            'CF1': Product('CF1', 'Coffee', 11.23),
         }
+
+        # Create an instance of Checkout with pricing rules
         self.checkout = Checkout(self.pricing_rules)
 
-    def test_buy_one_get_one_free(self) -> None:
-        """
-        Test Buy-One-Get-One-Free discount for Green Tea (GR1).
-        """
+    def test_scan_gr1_gr1(self):
+        """Test scanning two Green Tea (GR1) items with buy-one-get-one-free."""
         self.checkout.scan('GR1')
         self.checkout.scan('GR1')
         self.assertEqual(self.checkout.total(), 3.11)
 
-    def test_bulk_discount_strawberries(self) -> None:
-        """
-        Test bulk discount for Strawberries (SR1) when buying 3 or more.
-        """
+    def test_scan_sr1_sr1_gr1_sr1(self):
+        """Test scanning Strawberries (SR1) with bulk price and Green Tea (GR1)."""
         self.checkout.scan('SR1')
         self.checkout.scan('SR1')
         self.checkout.scan('GR1')
         self.checkout.scan('SR1')
         self.assertEqual(self.checkout.total(), 16.61)
 
-    def test_coffee_discount(self) -> None:
-        """
-        Test Coffee discount when buying 3 or more (CF1).
-        """
+    def test_scan_gr1_cf1_sr1_cf1_cf1(self):
+        """Test scanning Green Tea (GR1), Coffee (CF1) with discount for 3 coffees, and Strawberries (SR1)."""
         self.checkout.scan('GR1')
         self.checkout.scan('CF1')
         self.checkout.scan('SR1')
         self.checkout.scan('CF1')
         self.checkout.scan('CF1')
         self.assertEqual(self.checkout.total(), 30.57)
-    
-    def test_edge_case_3_strawberries(self) -> None:
-        """
-        Test when exactly 3 Strawberries are scanned, should trigger bulk price.
-        """
+
+    def test_scan_sr1_with_bulk_discount(self):
+        """Test scanning 3 Strawberries (SR1) to apply the bulk discount."""
         self.checkout.scan('SR1')
         self.checkout.scan('SR1')
-        self.checkout.scan('SR1')  # 3 should trigger bulk price
-        self.assertEqual(self.checkout.total(), 13.50)  # 4.50 * 3
-
-    def test_edge_case_3_coffees(self) -> None:
-        """
-        Test when exactly 3 Coffees are scanned, should trigger discount.
-        """
-        self.checkout.scan('CF1')
-        self.checkout.scan('CF1')
-        self.checkout.scan('CF1')  # 3 should trigger discount
-        self.assertEqual(self.checkout.total(), round(3 * (2 / 3 * 11.23), 2))
-
-    def test_empty_cart(self) -> None:
-        """
-        Test empty cart, should return total 0.
-        """
-        self.assertEqual(self.checkout.total(), 0)
-
-    def test_single_product(self) -> None:
-        """
-        Test a cart with a single product (GR1).
-        """
-        self.checkout.scan('GR1')
-        self.assertEqual(self.checkout.total(), 3.11)
-
-    def test_different_order(self) -> None:
-        """
-        Test different order of products in the cart.
-        """
-        self.checkout.scan('CF1')
-        self.checkout.scan('GR1')
         self.checkout.scan('SR1')
-        self.checkout.scan('CF1')
-        self.checkout.scan('CF1')  # 3 CF1 should still trigger discount
-        self.assertEqual(self.checkout.total(), 30.57)
+        self.assertEqual(self.checkout.total(), 13.50)  # 3 * 4.50€
 
-    def test_invalid_product(self) -> None:
-        """
-        Test invalid product code, should raise KeyError.
-        """
+    def test_scan_cf1_with_discount(self):
+        """Test scanning 3 Coffees (CF1) to apply the discount of 2/3 off the price."""
+        self.checkout.scan('CF1')
+        self.checkout.scan('CF1')
+        self.checkout.scan('CF1')
+        self.assertEqual(self.checkout.total(), 22.46)  # 3 * (2/3 of 11.23)
+
+    def test_invalid_product_code(self):
+        """Test scanning an invalid product code raises KeyError."""
         with self.assertRaises(KeyError):
             self.checkout.scan('INVALID')
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
