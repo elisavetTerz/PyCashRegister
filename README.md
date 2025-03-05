@@ -30,3 +30,6 @@ touch checkout.py requirements.txt README.md tests/test_checkout.py
 
 ## Step 3: Created test_checkout.py
 - Introduced the `test_checkout.py` file which contains unit tests to validate the functionality of the `checkout.py` file.
+
+## Step 4: Created app.py
+In this step, we introduced the `app.py` file, which serves as the main entry point for the application. The `app.py` file initializes and configures the Flask web application, setting up routes for handling product scanning, checkout logic, and returning the total price. It also includes necessary configurations such as enabling CORS (Cross-Origin Resource Sharing) to allow communication between the frontend and backend, ensuring smooth interaction with the React app.
